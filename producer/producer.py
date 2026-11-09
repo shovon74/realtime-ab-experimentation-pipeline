@@ -188,17 +188,19 @@ class ExperimentEventGenerator:
                     and self.rng.random() < self.config.late_conversion_rate
                 )
                 if is_late:
-                    # Late conversion: delayed past the 30-min watermark / attribution window
-                    delay_sec = self.rng.randint(
+                    # Late conversion (~3%): arrives with an event_ts older than the
+                    # 30-minute conversion watermark (45-90 minutes behind stream clock)
+                    lag_sec = self.rng.randint(
                         self.config.late_delay_min_sec,
                         self.config.late_delay_max_sec,
                     )
+                    conversion_ts = exposure_ts - timedelta(seconds=lag_sec)
                 else:
                     delay_sec = self.rng.randint(
                         self.config.normal_delay_min_sec,
                         self.config.normal_delay_max_sec,
                     )
-                conversion_ts = exposure_ts + timedelta(seconds=delay_sec)
+                    conversion_ts = exposure_ts + timedelta(seconds=delay_sec)
                 conversion_event = self.make_conversion_event(
                     user_id=user_id,
                     experiment=experiment,
