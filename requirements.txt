@@ -1,0 +1,24 @@
+# Core Streaming & Kafka
+kafka-python-ng==2.2.3
+pyspark==3.5.1
+
+# Data Lake & Warehouse Loaders
+pyarrow==17.0.0
+pandas==2.2.2
+numpy==1.26.4
+google-cloud-bigquery==3.25.0
+psycopg2-binary==2.9.9
+sqlalchemy==2.0.32
+
+# dbt (BigQuery primary + Postgres local switch)
+dbt-core==1.8.6
+dbt-bigquery==1.8.2
+dbt-postgres==1.8.2
+
+# Statistical Analysis
+scipy==1.14.1
+statsmodels==0.14.2
+
+# Testing & Code Quality
+pytest==8.3.2
+python-dotenv==1.0.1
